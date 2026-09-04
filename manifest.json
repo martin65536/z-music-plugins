@@ -1,59 +1,59 @@
 {
   "$schema": "https://musicfree.kuangrenbb.com/schema/subscription.json",
-  "name": "xmly 反编译版音乐插件合集",
-  "description": "从 gitcode.com/wenshao/xmly 反编译并人工重写的 7 个 MusicFree 插件：喜马拉雅 / 酷狗概念版 / 酷我音乐 / QQ 音乐歌词 / QQ 音乐 / 哔哩哔哩 / 网易云音乐。变量名全部语义化，关键函数添加 JSDoc 注释。",
-  "version": "1.0.0",
-  "author": "wenshao (original) <deobfuscated by reverse engineering>",
+  "name": "Z 系列音乐插件合集（反编译版）",
+  "description": "从 gitcode.com/wenshao/xmly 反编译并人工重写的 7 个 MusicFree 插件：喜马拉雅 / 酋狗概念版 / 酷我音乐 / QQ 音乐歌词 / QQ 音乐 / 哔哩哔哩 / 网易云音乐。变量名全部语义化，关键函数添加 JSDoc 注释，作者署名 Super Z。⚠️ 后端 ws.suol.cc 只支持 HTTP，国内运营商反诈会拦截，请部署 cloudflare-worker/ 里的 Worker 后使用。",
+  "version": "2.0.0",
+  "author": "Super Z (deobfuscated)",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/martin65536/xmly-decompiled",
   "plugins": [
     {
-      "name": "喜马拉雅有声书 (xmFM)",
+      "name": "喜马拉雅有声书",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/FM.js",
-      "version": "0.1.0",
-      "platform": "xmFM",
+      "version": "0.1.1",
+      "platform": "Z·喜马拉雅",
       "description": "xmFM 有声书播放源，支持单集/专辑搜索、专辑详情与多音质播放"
     },
     {
-      "name": "酷狗概念版 (温kg)",
+      "name": "酷狗概念版",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/kg.js",
-      "version": "0.3.0",
-      "platform": "温kg",
+      "version": "0.3.1",
+      "platform": "Z·酷狗",
       "description": "酷狗概念版全接口：搜索/多音质播放/歌词/每日推荐/我的歌单/最近收听/云盘/歌单导入"
     },
     {
-      "name": "酷我音乐 (温酷我)",
+      "name": "酷我音乐",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/kw.js",
-      "version": "0.1.0",
-      "platform": "温酷我",
+      "version": "0.1.1",
+      "platform": "Z·酷我",
       "description": "酷我音乐：搜索/多音质播放/歌词"
     },
     {
-      "name": "QQ音乐歌词源 (温Q词)",
+      "name": "QQ音乐歌词源",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/qc.js",
-      "version": "1.0.0",
-      "platform": "温Q词",
+      "version": "1.0.1",
+      "platform": "Z·QQ歌词",
       "description": "QQ 音乐官方歌词源（独立歌词插件），在搜索页选「歌词」分类使用"
     },
     {
-      "name": "QQ音乐 (温Q)",
+      "name": "QQ音乐",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/qq.js",
-      "version": "0.4.0",
-      "platform": "温Q",
+      "version": "0.4.1",
+      "platform": "Z·QQ音乐",
       "description": "QQ 音乐全功能：搜索/播放/歌词/专辑/歌单/榜单/歌手作品"
     },
     {
-      "name": "哔哩哔哩 (温哔哩)",
+      "name": "哔哩哔哩",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/wbl.js",
-      "version": "0.0.1",
-      "platform": "温哔哩",
+      "version": "0.0.2",
+      "platform": "Z·哔哩哔哩",
       "description": "B 站音频插件：视频/UP 主搜索、DASH 音频流多音质播放、收藏夹导入、评论获取"
     },
     {
-      "name": "网易云音乐 (温网易)",
+      "name": "网易云音乐",
       "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/wy.js",
-      "version": "0.0.1",
-      "platform": "温网易",
+      "version": "0.0.2",
+      "platform": "Z·网易云",
       "description": "网易云音乐：搜索/多音质播放/歌词/榜单/歌单导入"
     }
   ]

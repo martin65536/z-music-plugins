@@ -1,10 +1,10 @@
 /**
- * kw.js — 酷我音乐插件
+ * kw.js — Z·酷我 插件
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
- * 平台标识：温酷我
- * 作者：温
- * 反编译 + 变量重命名 + 注释 by 逆向工具链
+ * 平台标识：Z·酷我
+ * 原作者：温（原始混淆版）
+ * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 通过 ws.suol.cc 中转的酷我音乐接口，提供：
  *   1. 关键字搜索歌曲（一次返回 20 条，不支持分页）
@@ -15,12 +15,18 @@
  * 字段约定：返回的歌曲对象统一为 MusicFree 通用 schema
  *   { id, platform, title, artist, album, artwork, duration }
  * 其中 duration 单位为毫秒。
+ *
+ * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
+ * 部署 cloudflare-worker/ 里的 Worker 后，把下面 BASE_URL
+ * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-// 后端代理基础地址
-const API = "http://ws.suol.cc/kuwo/api";
+// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
+// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/kuwo/api"
+const BASE_URL = "http://ws.suol.cc/kuwo/api";
+const API = BASE_URL;
 
 // 播放音频时需要带上的 UA 与 Referer，否则 CDN 会返回 403
 const UA =
@@ -60,7 +66,7 @@ function normalizeSong(raw) {
 
   return {
     id: String(raw.id || ""),
-    platform: "酷我音乐",
+    platform: "Z·酷我",
     title: title || "未知歌曲",
     artist: artist || "未知歌手",
     album: raw.album || "",
@@ -70,9 +76,9 @@ function normalizeSong(raw) {
 }
 
 module.exports = {
-  platform: "温酷我",
-  version: "0.1.0",
-  author: "温",
+  platform: "Z·酷我",
+  version: "0.1.1",
+  author: "Super Z",
   description: "酷我音乐：搜索/多音质播放/歌词",
   updateURL: "http://ws.suol.cc/qq/kw.js",
   cacheControl: "no-cache",
@@ -163,7 +169,7 @@ module.exports = {
     const data = body.data;
     return {
       id: String(data.id || song.id),
-      platform: "酷我音乐",
+      platform: "Z·酷我",
       title: data.song_name || song.title || "未知歌曲",
       artist: data.singers || song.artist || "未知歌手",
       album: data.album || "",

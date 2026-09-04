@@ -1,10 +1,10 @@
 /**
- * FM.js — xmFM 喜马拉雅有声书插件
+ * FM.js — Z·喜马拉雅 插件
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
- * 平台标识：xmFM
- * 作者：温
- * 反编译 + 变量重命名 + 注释 by 逆向工具链
+ * 平台标识：Z·喜马拉雅
+ * 原作者：温（原始混淆版）
+ * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 通过 ws.suol.cc/xm/ 中转的喜马拉雅接口，支持：
  *   1. 单集（track）与专辑（album）双分类搜索
@@ -17,12 +17,18 @@
  *   - 单集 track   : { trackId, title, nickname, albumTitle, cover, duration, playCount }
  *   - 专辑 album    : { albumId,  title, nickname, cover,         playCount, tracksCount }
  * 后端 baseUrl: http://ws.suol.cc/xm/
+ *
+ * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
+ * 部署 cloudflare-worker/ 里的 Worker 后，把下面 BASE_URL
+ * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-// 后端代理基础地址（注意末尾带斜杠）
-const API = "http://ws.suol.cc/xm/";
+// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
+// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/xm/"
+const BASE_URL = "http://ws.suol.cc/xm/";
+const API = BASE_URL;
 
 // 播放音频时需要带上的 UA（喜马拉雅 CDN 校验）
 const UA =
@@ -40,9 +46,9 @@ const QUALITY_MAP = {
 };
 
 module.exports = {
-  platform: "xmFM",
-  version: "0.1.0",
-  author: "温",
+  platform: "Z·喜马拉雅",
+  version: "0.1.1",
+  author: "Super Z",
   description: "xmFM有声书播放源，支持单集/专辑搜索、专辑详情与多音质播放",
   cacheControl: "no-cache",
   supportedSearchType: ["music", "album"],
@@ -115,7 +121,7 @@ module.exports = {
 
     const tracks = body.results.map((item) => ({
       id: String(item.trackId),
-      platform: "喜马拉雅",
+      platform: "Z·喜马拉雅",
       title: item.title || "未知",
       artist: body.nickname || "未知主播",
       album: body.albumTitle || "",
@@ -127,7 +133,7 @@ module.exports = {
       isEnd: page >= (body.maxPage || 1),
       albumItem: {
         id: String(albumId),
-        platform: "喜马拉雅",
+        platform: "Z·喜马拉雅",
         title: body.albumTitle || album.title || "未知专辑",
         artist: body.nickname || album.artist || "未知主播",
         description: body.albumTitle || "",
@@ -187,7 +193,7 @@ module.exports = {
       return [
         {
           id: trackId,
-          platform: "喜马拉雅",
+          platform: "Z·喜马拉雅",
           title: playData.title || "未知",
           artist: "未知主播",
           artwork: (playData.cover || "").replace(/^http:/, "https:"),
@@ -226,7 +232,7 @@ module.exports = {
       for (const item of pageData.results) {
         allTracks.push({
           id: String(item.trackId),
-          platform: "喜马拉雅",
+          platform: "Z·喜马拉雅",
           title: item.title || "未知",
           artist: nickname,
           album: albumTitle,

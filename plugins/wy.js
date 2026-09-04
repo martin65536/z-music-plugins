@@ -1,10 +1,10 @@
 /**
- * wy.js — 网易云音乐插件
+ * wy.js — Z·网易云 插件
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
- * 平台标识：温网易
- * 作者：温
- * 反编译 + 变量重命名 + 注释 by 逆向工具链
+ * 平台标识：Z·网易云
+ * 原作者：温（原始混淆版）
+ * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 通过 ws.suol.cc/api/wy/wy_php.php/ 中转的网易云音乐接口，
  * 走的是网易云官方 API（NeteaseCloudMusicApi 风格）的字段结构：
@@ -22,12 +22,18 @@
  *   7. 歌单 / 单曲分享链接导入
  * ------------------------------------------------------------------
  * 后端约定：返回体 { code: 200, ... } 表示成功
+ *
+ * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
+ * 部署 cloudflare-worker/ 里的 Worker 后，把下面 BASE_URL
+ * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-// 后端代理基础地址（注意末尾带斜杠，所有子接口拼到后面）
-const SERVER = "http://ws.suol.cc/api/wy/wy_php.php/";
+// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
+// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/api/wy/wy_php.php/"
+const BASE_URL = "http://ws.suol.cc/api/wy/wy_php.php/";
+const SERVER = BASE_URL;
 
 /**
  * 音质映射：把宿主统一的音质档位转成网易云的 bitrate（bps）
@@ -47,7 +53,7 @@ const BR_MAP = {
 function formatSong(song) {
   return {
     id: String(song.id),
-    platform: "温网易",
+    platform: "Z·网易云",
     title: song.name || "未知",
     artist: (song.ar || []).map((a) => a.name).join("/") || "未知歌手",
     album: song.al?.name || "",
@@ -58,9 +64,9 @@ function formatSong(song) {
 }
 
 module.exports = {
-  platform: "温网易",
-  version: "0.0.1",
-  author: "温",
+  platform: "Z·网易云",
+  version: "0.0.2",
+  author: "Super Z",
   description: "基于第三方代理 API 的网易云音乐插件",
   supportedSearchType: ["music", "artist", "album", "sheet"],
   cacheControl: "no-cache",
@@ -197,7 +203,7 @@ module.exports = {
       isEnd: songs.length < limit,
       musicList: songs.map((s) => ({
         id: String(s.id),
-        platform: "温网易",
+        platform: "Z·网易云",
         title: s.name || "未知",
         artist: (s.ar || []).map((a) => a.name).join("/") || "未知歌手",
         album: s.al?.name || "",
@@ -312,7 +318,7 @@ module.exports = {
       allSongs.push(
         ...songs.map((s) => ({
           id: String(s.id),
-          platform: "温网易",
+          platform: "Z·网易云",
           title: s.name || "未知",
           artist: (s.ar || []).map((a) => a.name).join("/") || "未知歌手",
           album: s.al?.name || "",

@@ -1,21 +1,27 @@
 /**
- * qc.js — QQ 音乐独立歌词源插件
+ * qc.js — Z·QQ歌词 插件
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
- * 平台标识：温Q词
- * 作者：monkeycode（原始署名）
- * 反编译 + 变量重命名 + 注释 by 逆向工具链
+ * 平台标识：Z·QQ歌词
+ * 原作者：monkeycode（原始混淆版）
+ * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 本插件只做一件事：在搜索页选择「歌词」分类时，返回 QQ 音乐
  * 歌曲列表（仅含 songmid / 歌名 / 歌手 / 专辑），并允许通过
  * songmid 拉取对应的 LRC 原文歌词。它不提供播放能力，因此
  * 通常与其他 QQ 音乐播放插件配合使用。
+ *
+ * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
+ * 解决方案：部署 cloudflare-worker/ 里的 Worker，把下面 BASE_URL
+ * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-// 后端代理：原作者自建的 PHP 中转服务，封装了 QQ 音乐官方接口
-const API = "http://ws.suol.cc/qq/qq_php.php";
+// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
+// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/qq/qq_php.php"
+const BASE_URL = "http://ws.suol.cc/qq/qq_php.php";
+const API = BASE_URL;
 
 /**
  * 去除 HTML 标签并首尾去空格
@@ -28,9 +34,9 @@ function stripHtml(raw) {
 }
 
 module.exports = {
-  platform: "温Q词",
-  version: "1.0.0",
-  author: "monkeycode",
+  platform: "Z·QQ歌词",
+  version: "1.0.1",
+  author: "Super Z",
   description: "QQ 音乐官方歌词源（独立歌词插件），在搜索页选「歌词」分类使用",
   updateURL: "http://ws.suol.cc/qq/qqlyric.js",
   cacheControl: "no-cache",

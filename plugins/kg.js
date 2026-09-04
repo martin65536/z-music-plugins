@@ -1,10 +1,10 @@
 /**
- * kg.js — 酷狗概念版音乐插件
+ * kg.js — Z·酷狗 插件
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
- * 平台标识：温kg
- * 作者：温
- * 反编译 + 变量重命名 + 注释 by 逆向工具链
+ * 平台标识：Z·酷狗
+ * 原作者：温（原始混淆版）
+ * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 通过 ws.suol.cc/kg/kg.php 中转的酷狗概念版接口，支持：
  *   1. 关键字搜索歌曲
@@ -17,11 +17,18 @@
  * ------------------------------------------------------------------
  * 后端约定：返回体 { code: 0, data: ... } 表示成功
  * 后端 baseUrl: http://ws.suol.cc/kg/kg.php
+ *
+ * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
+ * 部署 cloudflare-worker/ 里的 Worker 后，把下面 BASE_URL
+ * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-const API = "http://ws.suol.cc/kg/kg.php";
+// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
+// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/kg/kg.php"
+const BASE_URL = "http://ws.suol.cc/kg/kg.php";
+const API = BASE_URL;
 
 // 播放时需要带上的 UA 与 Referer
 const UA =
@@ -65,7 +72,7 @@ function normalizeSong(raw) {
 
   return {
     id: String(raw.id || ""),
-    platform: "酷狗音乐",
+    platform: "Z·酷狗",
     title: title || "未知歌曲",
     artist: artist || "未知歌手",
     album: raw.album || "",
@@ -75,9 +82,9 @@ function normalizeSong(raw) {
 }
 
 module.exports = {
-  platform: "温kg",
-  version: "0.3.0",
-  author: "温",
+  platform: "Z·酷狗",
+  version: "0.3.1",
+  author: "Super Z",
   description:
     "酷狗概念版全接口：搜索/多音质播放/歌词/每日推荐/我的歌单/最近收听/云盘/歌单导入(gcid/分享短链)",
   updateURL: "http://ws.suol.cc/qq/kg.js",
@@ -154,7 +161,7 @@ module.exports = {
     const data = body.data;
     return {
       id: String(data.id || song.id),
-      platform: "酷狗音乐",
+      platform: "Z·酷狗",
       title: data.name || song.title || "未知歌曲",
       artist: data.artist || song.artist || "未知歌手",
       album: data.album || "",
@@ -274,7 +281,7 @@ module.exports = {
       const songs = body.data.songs
         .map((s) => ({
           id: String(s.hash || ""),
-          platform: "酷狗音乐",
+          platform: "Z·酷狗",
           title: s.name || "未知歌曲",
           artist: s.artist || "未知歌手",
           duration: 0,
@@ -306,7 +313,7 @@ module.exports = {
       const songs = body.data.songs
         .map((s) => ({
           id: String(s.hash || ""),
-          platform: "酷狗音乐",
+          platform: "Z·酷狗",
           title: s.name || "未知歌曲",
           artist: s.artist || "未知歌手",
           album: s.album || "",
@@ -503,7 +510,7 @@ module.exports = {
       isEnd: true,
       albumItem: {
         id: String(albumId),
-        platform: "酷狗音乐",
+        platform: "Z·酷狗",
         title: album.title || "酷狗歌单",
         artist: album.artist || "",
         artwork: album.artwork || "",

@@ -1,10 +1,10 @@
 /**
- * qq.js — QQ 音乐全功能插件
+ * qq.js — Z·QQ音乐 插件
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
- * 平台标识：温Q
- * 作者：温
- * 反编译 + 变量重命名 + 注释 by 逆向工具链
+ * 平台标识：Z·QQ音乐
+ * 原作者：温（原始混淆版）
+ * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 通过 ws.suol.cc/qq/qq_php.php 中转的 QQ 音乐接口，支持：
  *   1. 多类型搜索：歌曲 / 专辑 / 歌手 / 歌单
@@ -23,15 +23,21 @@
  *   - mediaId（strMediaMid）和 songmid 是两套东西，部分歌曲需要同时提供
  * ------------------------------------------------------------------
  * 后端约定：返回体 { result: 100, data: ... } 表示成功
+ *
+ * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
+ * 部署 cloudflare-worker/ 里的 Worker 后，把下面 BASE_URL
+ * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-// 后端代理地址
-const API = "http://ws.suol.cc/qq/qq_php.php";
+// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
+// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/qq/qq_php.php"
+const BASE_URL = "http://ws.suol.cc/qq/qq_php.php";
+const API = BASE_URL;
 
 // 平台标识
-const PLATFORM = "温Q";
+const PLATFORM = "Z·QQ音乐";
 
 // 播放时需要的 UA 与 Referer
 const UA =
@@ -303,8 +309,8 @@ async function resolveSongBySongId(song) {
 
 module.exports = {
   platform: PLATFORM,
-  author: "温",
-  version: "0.4.0",
+  author: "Super Z",
+  version: "0.4.1",
   srcUrl: "http://ws.suol.cc/qq/qq.js",
   cacheControl: "no-cache",
   primaryKey: ["id", "mediaId"],
