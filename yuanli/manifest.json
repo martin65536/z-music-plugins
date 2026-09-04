@@ -1,0 +1,52 @@
+{
+  "$schema": "https://musicfree.kuangrenbb.com/schema/subscription.json",
+  "name": "元力菌 SVIP 音源合集（反编译版）",
+  "description": "从 13413.kstore.vip/yuanli/yuanli.json 反编译并人工重写的 6 个 MusicFree 插件：网易云 / 酷狗 / 酷我 / QQ音乐 / 哔哩哔哩 / 咪咕。变量名全部语义化，关键加密算法（weapi AES+RSA）逐步骤注释。原作者「元力菌」，反编译 by Super Z。",
+  "version": "1.2.0",
+  "author": "元力菌 (original) <deobfuscated by Super Z>",
+  "homepage": "https://13413.kstore.vip/yuanli/yuanli.json",
+  "plugins": [
+    {
+      "name": "网易云（元力WY）",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/wy.js",
+      "version": "1.2.0",
+      "platform": "元力WY",
+      "description": "网易云音乐：直连 weapi 接口，AES+RSA 双重加密，播放走 175.27.166.236 代理"
+    },
+    {
+      "name": "酷狗（元力KG）",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/kg.js",
+      "version": "1.2.0",
+      "platform": "元力KG",
+      "description": "酷狗音乐：直连 mobilecdn.kugou.com 等官方移动端 API"
+    },
+    {
+      "name": "酷我（元力KW）",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/kw.js",
+      "version": "1.2.0",
+      "platform": "元力KW",
+      "description": "酷我音乐：直连 search.kuwo.cn / wapi.kuwo.cn 等官方接口"
+    },
+    {
+      "name": "QQ音乐（元力QQ）",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/qq.js",
+      "version": "1.2.0",
+      "platform": "元力QQ",
+      "description": "QQ 音乐：直连 u.y.qq.com 官方 CGI，播放走 175.27.166.236 代理"
+    },
+    {
+      "name": "哔哩哔哩",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/bilibili.js",
+      "version": "0.3.0",
+      "platform": "bilibili",
+      "description": "B 站：视频搜索 / 分P / UP主 / 排行榜 / 收藏夹导入，原作者猫头猫"
+    },
+    {
+      "name": "咪咕（元力MG）",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/xiaomi.js",
+      "version": "1.2.0",
+      "platform": "元力MG",
+      "description": "咪咕音乐：直连 m.music.migu.cn 官方接口"
+    }
+  ]
+}
