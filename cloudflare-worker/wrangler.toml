@@ -1,9 +1,0 @@
-name = "xmly-proxy"
-main = "worker.js"
-compatibility_date = "2024-09-01"
-
-# 上游地址（如果以后换后端，改这里）
-# 这里写死成 ws.suol.cc，你也可以改成任何 HTTP 反代目标
-[vars]
-UPSTREAM = "http://ws.suol.cc"
-# AUTH_KEY = "your-secret-key-here"  # 取消注释并填一个随机字符串启用鉴权

@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------
  * 适用宿主：MusicFree / 同类插件系统
  * 平台标识：Z·酷我
- * 原作者：温（原始混淆版）
+ * 原作者：wenshao（原始混淆版）
  * 反编译 + 变量重命名 + 注释 by Super Z
  * ------------------------------------------------------------------
  * 通过 ws.suol.cc 中转的酷我音乐接口，提供：
@@ -16,15 +16,11 @@
  *   { id, platform, title, artist, album, artwork, duration }
  * 其中 duration 单位为毫秒。
  *
- * ⚠️ 反诈提示：后端 ws.suol.cc 只支持 HTTP，国内运营商会拦截。
- * 部署 cloudflare-worker/ 里的 Worker 后，把下面 BASE_URL
- * 改成你的 Worker HTTPS 地址即可。
  */
 
 const axios = require("axios");
 
-// 后端代理基础地址（HTTP，国内需走 Cloudflare Worker 反代）
-// 部署 Worker 后把这里改成："https://你的Worker.workers.dev/kuwo/api"
+// 后端代理基础地址
 const BASE_URL = "http://ws.suol.cc/kuwo/api";
 const API = BASE_URL;
 

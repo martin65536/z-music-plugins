@@ -1,10 +1,9 @@
 {
   "$schema": "https://musicfree.kuangrenbb.com/schema/subscription.json",
   "name": "Z 系列音乐插件合集（反编译版）",
-  "description": "从 gitcode.com/wenshao/xmly 反编译并人工重写的 7 个 MusicFree 插件：喜马拉雅 / 酋狗概念版 / 酷我音乐 / QQ 音乐歌词 / QQ 音乐 / 哔哩哔哩 / 网易云音乐。变量名全部语义化，关键函数添加 JSDoc 注释，作者署名 Super Z。⚠️ 后端 ws.suol.cc 只支持 HTTP，国内运营商反诈会拦截，请部署 cloudflare-worker/ 里的 Worker 后使用。",
+  "description": "从 gitcode.com/wenshao/xmly 反编译并人工重写的 7 个 MusicFree 插件：喜马拉雅 / 酷狗概念版 / 酷我音乐 / QQ 音乐歌词 / QQ 音乐 / 哔哩哔哩 / 网易云音乐。变量名全部语义化，关键函数添加 JSDoc 注释，作者署名 Super Z。",
   "version": "2.0.0",
   "author": "Super Z (deobfuscated)",
-  "license": "AGPL-3.0",
   "homepage": "https://github.com/martin65536/xmly-decompiled",
   "plugins": [
     {
@@ -44,7 +43,7 @@
     },
     {
       "name": "哔哩哔哩",
-      "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/wbl.js",
+      "url": "https://raw.githubusercontent.com/martin65536/xmly-decompiled/main/plugins/bl.js",
       "version": "0.0.2",
       "platform": "Z·哔哩哔哩",
       "description": "B 站音频插件：视频/UP 主搜索、DASH 音频流多音质播放、收藏夹导入、评论获取"
