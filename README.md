@@ -1,6 +1,6 @@
 # Z 系列音乐插件合集
 
-两个系列共 13 个 MusicFree 插件，覆盖喜马拉雅 / 酷狗 / 酷我 / QQ音乐 / 网易云 / 哔哩哔哩 / 咪咕等主流平台。
+三个系列共 14 个 MusicFree 插件，覆盖喜马拉雅 / 酷狗 / 酷我 / QQ音乐 / 网易云 / 哔哩哔哩 / 咪咕等主流平台。
 
 ## 系列 1：Z 系列（基于 wenshao/xmly 反编译）
 
@@ -39,12 +39,25 @@ https://raw.githubusercontent.com/martin65536/z-music-plugins/main/manifest.json
 https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/manifest.json
 ```
 
+## 系列 3：云云音乐（反编译版）
+
+1 个插件，原作者「小橙」（QQ群 1077835447），反编译 by Super Z。原版来自 `2209.kstore.space/xiaochen.js`，使用 javascript-obfuscator 混淆。
+
+| 文件 | 平台标识 | 功能 | 版本 |
+| --- | --- | --- | --- |
+| `xiaochen/xiaochen.js` | 云云音乐 | 网易云代理（自建后端 + 部分直连 EAPI，AES-ECB 加密） | 2.1.0 |
+
+**订阅地址**：
+```
+https://raw.githubusercontent.com/martin65536/z-music-plugins/main/xiaochen/manifest.json
+```
+
 ## 代码质量
 
-- 13 个文件全部通过 `node --check` 语法校验
+- 14 个文件全部通过 `node --check` 语法校验
 - 与原混淆版的导出 key 集合完全一致（自动验证）
 - 所有 `_0xXXXX` 变量已重命名为语义化名称
-- 关键算法（weapi AES+RSA 双重加密、songId↔songmid 转换、DASH 音轨选档、收藏夹分页）逐步骤注释
+- 关键算法（weapi AES+RSA 双重加密、EAPI AES-ECB 加密、songId↔songmid 转换、DASH 音轨选档、收藏夹分页）逐步骤注释
 - 每个函数都有 JSDoc 注释
 
 ## API 可用性测试（2026-09-04）
@@ -70,6 +83,13 @@ https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/manife
 | QQ (元力QQ) | ❌ | N/A | N/A | 测试环境签名可能不通 |
 | 咪咕 (元力MG) | ❌ | N/A | N/A | 咪咕对境外 IP 限制 |
 
+### 云云音乐
+
+| 平台 | 搜索 | 播放 | 歌词 | 备注 |
+| --- | --- | --- | --- | --- |
+| 云云音乐 | ❌ | N/A | N/A | 后端 121.196.228.123:8979 在测试环境连不上 |
+| 榜单 | ✅ | - | - | 内置数据，无需请求后端 |
+
 ## 目录结构
 
 ```
@@ -83,14 +103,17 @@ https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/manife
 │   ├── qq.js
 │   ├── bl.js
 │   └── wy.js
-└── yuanli/                  # 元力菌系列插件
-    ├── manifest.json        # 元力菌系列订阅清单
-    ├── wy.js
-    ├── kg.js
-    ├── kw.js
-    ├── qq.js
-    ├── xiaomi.js
-    └── bilibili.js
+├── yuanli/                  # 元力菌系列插件
+│   ├── manifest.json        # 元力菌系列订阅清单
+│   ├── wy.js
+│   ├── kg.js
+│   ├── kw.js
+│   ├── qq.js
+│   ├── xiaomi.js
+│   └── bilibili.js
+└── xiaochen/                # 云云音乐插件
+    ├── manifest.json        # 云云音乐订阅清单
+    └── xiaochen.js
 ```
 
 ## 致谢
@@ -98,5 +121,6 @@ https://raw.githubusercontent.com/martin65536/z-music-plugins/main/yuanli/manife
 - Z 系列原作者：wenshao
 - 元力菌系列原作者：微信公众号「元力菌」
 - bilibili.js 原作者：猫头猫（maotoumao）
+- 云云音乐原作者：小橙（QQ群 1077835447）
 - 反编译工具：[webcrack](https://github.com/j4k0xb/webcrack)
 - 反编译 + 重写：Super Z

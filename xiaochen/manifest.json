@@ -1,0 +1,17 @@
+{
+  "$schema": "https://musicfree.kuangrenbb.com/schema/subscription.json",
+  "name": "云云音乐（反编译版）",
+  "description": "从 2209.kstore.space/xiaochen.js 反编译并人工重写的 MusicFree 插件。原作者「小橙」（QQ群 1077835447），平台标识「云云音乐」。后端走 121.196.228.123:8979 自建代理，部分接口直连网易云 EAPI（AES-ECB 加密）。",
+  "version": "2.1.0",
+  "author": "小橙 (original) <deobfuscated by Super Z>",
+  "homepage": "https://2209.kstore.space/xiaochen.js",
+  "plugins": [
+    {
+      "name": "云云音乐",
+      "url": "https://raw.githubusercontent.com/martin65536/z-music-plugins/main/xiaochen/xiaochen.js",
+      "version": "2.1.0",
+      "platform": "云云音乐",
+      "description": "网易云音乐代理：搜索/专辑/歌单/榜单/歌词/导入，支持 8 种音质（含 dolby）"
+    }
+  ]
+}
